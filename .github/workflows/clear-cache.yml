@@ -1,0 +1,19 @@
+name: Clear GitHub Pages Cache
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Trigger GitHub Pages Rebuild
+      run: |
+        touch .nojekyll
+        git config user.name 'GitHub Actions'
+        git config user.email 'actions@github.com'
+        git add .nojekyll
+        git commit -m "Trigger GitHub Pages Rebuild"
+        git push
